@@ -1,0 +1,30 @@
+\begin{thebibliography}{1}
+
+\bibitem{LMR}
+F.~T. Leighton, Bruce~M. Maggs, and Satish~B. Rao.
+\newblock Packet routing and job-shop scheduling ino(congestion+dilation)
+  steps.
+\newblock {\em Combinatorica}, 14(2):167--186, 1994.
+
+\bibitem{SignallingTypes}
+Introduction to railway signalling.
+\newblock
+  \url{https://www.slideshare.net/sandeeppatalay/introduction-to-railway-signalling
+  }.
+
+\bibitem{SignallingImgs}
+Visual depiction of signalling elements.
+\newblock \url{http://www.irfca.org/faq/faq-signal2.html}.
+
+\bibitem{DelayInTrains}
+Causes of delays in railways operation.
+\newblock
+  \url{https://www.amtrak.com/servlet/Satellite?c=AM_Content_C&cid=1241245662251&pagename=am/Popup}.
+
+\bibitem{7313186}
+R.~Wang and D.~B. Work.
+\newblock Data driven approaches for passenger train delay estimation.
+\newblock In {\em 2015 IEEE 18th International Conference on Intelligent
+  Transportation Systems}, pages 535--540, Sept 2015.
+
+\end{thebibliography}
