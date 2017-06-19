@@ -8,6 +8,7 @@ edgeL = {}
 haltMap = {}
 platformMap = {}
 weeklySchedule = {}
+speedMap = {}
 typeMap = {}
 args = sys.argv
 
@@ -20,14 +21,17 @@ with open(args[1]) as data_file:
 
 for train in data :
     trainhalts  = {}
+    speeddict = {}
     route = [s.replace(" ", "_") for s in train['route']]
     halts = [float(x) for x in train['halt']]
     distance = [int(x) for x in train['distance']] # TODO int
+    speeds = [int(x) for x in train['speed']]
     weeklySchedule[train['train_id']] = train['weekly_schedule']
     typeMap[train['train_id']] = train['type']
     for i in range(0,len(route)):
         trainhalts[route[i]] = halts[i]
     haltMap[train['train_id']] = trainhalts
+    speedMap[train['train_id']] = speeds
 
     for i in range(0, len(route)):
         station_code = route[i]
@@ -167,6 +171,7 @@ def convert(train) :
     route += [original_route[-1]]
 
     obj['route'] = route
+    obj['speed'] = speedMap[train['train_id']]
     obj['train_id'] = train['train_id']
     obj['name'] = train['name']
     time_split = [int(x) for x in train['departure'][0].split("'")[1].split(':')]
