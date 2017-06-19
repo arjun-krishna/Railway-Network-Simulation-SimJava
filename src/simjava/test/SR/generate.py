@@ -3,12 +3,14 @@ from bs4 import BeautifulSoup as BS
 import sys
 import json
 def process_route(name, routelist):
-	dictdata = {'route':[],'distance':[],'halt':[],'platform_count':[]}
+	dictdata = {'route':[],'distance':[],'halt':[],'platform_count':[], 'speed':[]}
 	for station_data in routelist:
+		# print routelist
 		dictdata['route'].append(station_data['st_code'])
 		dictdata['distance'].append(float(station_data['dist']))
 		dictdata['halt'].append(station_data['halt'])
 		dictdata['platform_count'].append(station_data['platform_count'])
+		dictdata['speed'].append(station_data['speed'])
 	if len(dictdata['route']) > 0:
 		dictdata['src'] = dictdata['route'][0]
 		dictdata['dst'] = dictdata['route'][-1]
@@ -38,6 +40,7 @@ def get_route(num):
 				tds = row.findAll('td')
 				station_data = {}
 				station_data['platform_count'] = 2
+				station_data['speed'] = '50'
 				if len(tds) > 3 and tds[3].a:
 					data = tds[3].a['title']
 					step1 = data.split('|')[0]
@@ -50,6 +53,9 @@ def get_route(num):
 							failed_list.append(station_data['st_name'])
 					except :
 						pass
+					station_data['speed'] = tds[14].text
+					if station_data['speed'] == '-':
+						station_data['speed'] = '50'
 					station_data['dist'] 	= tds[13].text
 					station_data['zone'] 	= tds[16].text
 					try:

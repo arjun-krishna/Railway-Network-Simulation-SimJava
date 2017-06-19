@@ -48,33 +48,33 @@ public class Source extends Sim_entity {
 
           switch(globals.protocol) {
             case 0 : {
-              speed = globals.speedMap.get(train_id);      // default speed
+              speed = globals.speedHash.get(train_id + startNode).doubleValue();      // default speed
               delay = 0.0;                                 // Cause no delay in departure
               break;
             }
             case 1 : {
               double max_delay = ((globals.alpha * globals.congestion) / Math.log(globals.N * globals.dilation));
               Sim_uniform_obj uniDist = new Sim_uniform_obj("uniform", 1, max_delay);
-              speed = globals.speedMap.get(train_id);     // default speed
+              speed = globals.speedHash.get(train_id + startNode).doubleValue();      // default speed
               delay = uniDist.sample();
               break;
             }
             case 2 : {
               Sim_normal_obj normalDist = new Sim_normal_obj("normal", globals.mean, globals.var);
-              speed = globals.speedMap.get(train_id) + (normalDist.sample());
+              speed = globals.speedHash.get(train_id + startNode).doubleValue() + (normalDist.sample());
               delay = 0.0;
               break;
             }
             case 3 : {
               Sim_normal_obj normalDist = new Sim_normal_obj("normal", globals.mean, globals.var);
-              speed = globals.speedMap.get(train_id) + (normalDist.sample());
+              speed = globals.speedHash.get(train_id + startNode).doubleValue() + (normalDist.sample());
               delay = 0.0;
               break;
             }
             case 4 : {
               double max_delay = ((globals.beta * globals.congestion) / Math.log(globals.N * globals.dilation));
               Sim_uniform_obj uniDist = new Sim_uniform_obj("uniform", 1, max_delay);
-              speed = globals.speedMap.get(train_id);     // default speed
+              speed = globals.speedHash.get(train_id + startNode).doubleValue();     // default speed
               delay = uniDist.sample();
             }
           }

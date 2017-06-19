@@ -146,7 +146,7 @@ public class SignalNode extends Sim_entity {
               Double delay = Sim_system.sim_clock() - timeRecord.get(msg.train_id);
               OUT(msg.train_id, delay);
 
-              Double trainDelay = ((globals.linkDistance * 3600) / trainSpeed.get(msg.train_id)); 
+              Double trainDelay = ((globals.linkDistance * 3600) / globals.speedHash.get(msg.train_id+nodeName) * 1.0); 
 
               if (globals.protocol == 4) {
                 

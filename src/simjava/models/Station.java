@@ -216,7 +216,7 @@ public class Station extends Sim_entity {
 
               OUT(msg.train_id, delay-haltTime);
 
-              Double trainDelay = ((globals.linkDistance * 3600) / trainSpeed.get(msg.train_id)); 
+              Double trainDelay = ((globals.linkDistance * 3600) / globals.speedHash.get(msg.train_id+nodeName)*1.0); 
               
               if (globals.protocol == 4) {
 

@@ -56,7 +56,7 @@ public class Globals {
   // Schedule object contains
   // the route of the train, hashed to the a timestamp at which the
   // train is scheduled.
-
+  public HashMap<String , Long> speedHash;
   public HashMap<Double, List<String> > Schedule;
   public HashMap<Double, String> TrainIdentifier;
 
@@ -74,6 +74,7 @@ public class Globals {
     haltMap = new HashMap<String, HashMap<String,Double> >() ;
     platformMap = new HashMap<String, Integer >();
     speedMap = new HashMap<String, Double >();
+    speedHash = new HashMap<String, Long >();
     weeklySchedule = new HashMap<String, List<Integer> >();
     LOCK = new Lock();
     this.loadDataFromJson(args);
@@ -120,6 +121,8 @@ public class Globals {
 
         JSONObject train = (JSONObject) elem;
         List<String> route  = (List<String>) train.get("route");
+        List<Long> speeds = (List<Long>) train.get("speed");
+
         Double timestamp;
         if(train.get("departure") instanceof Long) 
           timestamp = ((Long) train.get("departure")).doubleValue();
@@ -130,6 +133,14 @@ public class Globals {
         Schedule.put(timestamp, route);
 
         String train_id = (String) train.get("train_id");
+
+        int currStationIndex = 0;
+        for(String node : route){
+          speedHash.put(train_id + node, speeds.get(currStationIndex));
+          if(!node.contains("$")){
+            currStationIndex+=1;
+          }
+        }
         TrainIdentifier.put(timestamp, train_id);
       }
 
