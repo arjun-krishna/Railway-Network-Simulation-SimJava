@@ -210,7 +210,7 @@ with open('../../data/sr_data/wod.json','r') as f :
 	print max2node , avg_end_to_end_map[max2node]
 	print max3node , avg_end_to_end_map[max3node]
 	print max4node , avg_end_to_end_map[max4node]
-	print 'mean end-to-end delay' + str(end_to_end_delay_sum/(end_to_end_delay_count*1.00))
+	print 'mean end-to-end delay : ' + str(end_to_end_delay_sum/(end_to_end_delay_count*1.00))
 	plt.plot(range(len(end_to_end_delay_vector)), end_to_end_delay_vector)
 	plt.tick_params(
     axis='x',          # changes apply to the x-axis
@@ -259,7 +259,7 @@ print max1node , no_of_delay[max1node]
 print max2node , no_of_delay[max2node]
 print max3node , no_of_delay[max3node]
 print max4node , no_of_delay[max4node]
-print 'mean no_of_delays' + str(no_of_delays/(no_of_stations*1.00))
+print 'mean no_of_delays : ' + str(no_of_delays/(no_of_stations*1.00))
 
 plt.plot(range(len(y)), y)
 plt.tick_params(
