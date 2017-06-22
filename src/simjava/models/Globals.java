@@ -33,7 +33,7 @@ public class Globals {
   public double dilation = 356;
 
   /*protocol 1*/
-  public double alpha = 2000.0;
+  public double alpha = 1000.0;
 
   /*protocol 2(or)3*/
   public double mean = 0;

@@ -1,6 +1,10 @@
 #!/usr/bin/python
+import sys
 
 file_name = '../statistics.dat'
+if len(sys.argv) > 1: 
+	file_name = sys.argv[1]
+
 
 
 max_delay = {}
