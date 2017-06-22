@@ -111,8 +111,33 @@ for node in total_delay :
 
 	node_avg_delay[node] = (total_delay[node] / count[node])
 
-print node_name[avg_delay.index(max(avg_delay))]
 
+max1node = node_avg_delay.iterkeys().next()
+for node in node_avg_delay:
+	if '$' not in node:
+		max1node = node if node_avg_delay[max1node] < node_avg_delay[node] else max1node 
+max2node = node_avg_delay.iterkeys().next()
+for node in node_avg_delay :
+	if node_avg_delay[node]<node_avg_delay[max1node] and '$' not in node:
+		max2node = node if node_avg_delay[max2node] < node_avg_delay[node] else max2node 
+
+max3node = node_avg_delay.iterkeys().next()
+for node in node_avg_delay :
+	if node_avg_delay[node]<node_avg_delay[max2node] and '$' not in node:
+		max3node = node if node_avg_delay[max3node] < node_avg_delay[node] else max3node 
+
+max4node = node_avg_delay.iterkeys().next()
+for node in node_avg_delay :
+	if node_avg_delay[node]<node_avg_delay[max3node] and '$' not in node:
+		max4node = node if node_avg_delay[max4node] < node_avg_delay[node] else max4node 
+print 'node avg delays stations'
+print max1node , node_avg_delay[max1node]
+print max2node , node_avg_delay[max2node]
+print max3node , node_avg_delay[max3node]
+print max4node , node_avg_delay[max4node]
+
+
+print node_name[avg_delay.index(max(avg_delay))] 
 # Plot the average Delay
 plt.plot(range(len(node_name)), avg_delay)
 plt.tick_params(
@@ -132,6 +157,8 @@ plt.title('Average Delay vs Nodes')
 
 plt.show()
 
+
+
 # Historgram of observed delays
 plt.ylim((0,1000))
 plt.hist(delays,bins=100)
@@ -140,6 +167,8 @@ plt.xlabel('Delay time (in s)')
 plt.ylabel('Frequency of observation')
 
 plt.show()
+
+avg_end_to_end_map = {}
 
 with open('../../data/sr_data/wod.json','r') as f :
 	wod = json.load(f)
@@ -150,11 +179,32 @@ with open('../../data/sr_data/wod.json','r') as f :
 	for train_no in end_to_end_delay :
 		L = wod[train_no]
 		avg_end_to_end_delay = end_to_end_delay[train_no] / sum(L)
-
+		avg_end_to_end_map[train_no] = avg_end_to_end_delay
 		end_to_end_delay_vector.append(avg_end_to_end_delay)
 		train_no_vector.append(train_no)
 
-	
+	max1node = avg_end_to_end_map.iterkeys().next()
+	for node in avg_end_to_end_map:
+		max1node = node if avg_end_to_end_map[max1node] < avg_end_to_end_map[node] else max1node 
+	max2node = avg_end_to_end_map.iterkeys().next()
+	for node in avg_end_to_end_map :
+		if avg_end_to_end_map[node]<avg_end_to_end_map[max1node]:
+			max2node = node if avg_end_to_end_map[max2node] < avg_end_to_end_map[node] else max2node 
+
+	max3node = avg_end_to_end_map.iterkeys().next()
+	for node in avg_end_to_end_map :
+		if avg_end_to_end_map[node]<avg_end_to_end_map[max2node]:
+			max3node = node if avg_end_to_end_map[max3node] < avg_end_to_end_map[node] else max3node 
+
+	max4node = avg_end_to_end_map.iterkeys().next()
+	for node in avg_end_to_end_map :
+		if avg_end_to_end_map[node]<avg_end_to_end_map[max3node]:
+			max4node = node if avg_end_to_end_map[max4node] < avg_end_to_end_map[node] else max4node 
+	print 'end_to_end delays train , delays'
+	print max1node , avg_end_to_end_map[max1node]
+	print max2node , avg_end_to_end_map[max2node]
+	print max3node , avg_end_to_end_map[max3node]
+	print max4node , avg_end_to_end_map[max4node]
 	plt.plot(range(len(end_to_end_delay_vector)), end_to_end_delay_vector)
 	plt.tick_params(
     axis='x',          # changes apply to the x-axis
@@ -176,6 +226,29 @@ for station in no_of_delay :
 	y.append(no_of_delay[station])
 	x.append(station)
 
+max1node = no_of_delay.iterkeys().next()
+for node in no_of_delay:
+	if '$' not in node:
+		max1node = node if no_of_delay[max1node] < no_of_delay[node] else max1node 
+max2node = no_of_delay.iterkeys().next()
+for node in no_of_delay :
+	if no_of_delay[node]<no_of_delay[max1node] and '$' not in node:
+		max2node = node if no_of_delay[max2node] < no_of_delay[node] else max2node 
+
+max3node = no_of_delay.iterkeys().next()
+for node in no_of_delay :
+	if no_of_delay[node]<no_of_delay[max2node] and '$' not in node:
+		max3node = node if no_of_delay[max3node] < no_of_delay[node] else max3node 
+
+max4node = no_of_delay.iterkeys().next()
+for node in no_of_delay :
+	if no_of_delay[node]<no_of_delay[max3node] and '$' not in node:
+		max4node = node if no_of_delay[max4node] < no_of_delay[node] else max4node 
+print 'no of delays  , station v no_of_delays'
+print max1node , no_of_delay[max1node]
+print max2node , no_of_delay[max2node]
+print max3node , no_of_delay[max3node]
+print max4node , no_of_delay[max4node]
 
 plt.plot(range(len(y)), y)
 plt.tick_params(
@@ -229,5 +302,4 @@ with open('../../data/sr_data/signalMap.json','r') as f :
 
 	with open('delay_network.json', 'w') as f :
 		json.dump(delayNetwork, f)
-
 
