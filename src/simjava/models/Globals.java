@@ -22,10 +22,10 @@ public class Globals {
   /* LMR Protocol */
   public int protocol = 0;
   // 0 - Default [No LMR]
-  // 1 - delay at source
+  // 1 - delay at source [LMR]
   // 2 - every train sent with a initial velocity picked by a normal distribution
   // 3 - every link train velocity changed by a normal distribution
-  // 4 - delay at all nodes with a normal distribution
+  // 4 - delay at all nodes with a normal distribution [RDIN]
 
 
   public Integer congestion = 4;
@@ -40,7 +40,7 @@ public class Globals {
   public double var = 1000;
 
   /*protocol 4*/
-  public double beta = 100;
+  public double beta = 300;
   public double frame_size = Math.log(dilation);
 
 
