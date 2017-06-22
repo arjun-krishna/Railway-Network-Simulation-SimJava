@@ -20,7 +20,7 @@ public class Globals {
   public Double SPEED_SF = 45.0;
 
   /* LMR Protocol */
-  public int protocol = 4;
+  public int protocol = 0;
   // 0 - Default [No LMR]
   // 1 - delay at source
   // 2 - every train sent with a initial velocity picked by a normal distribution
@@ -28,12 +28,12 @@ public class Globals {
   // 4 - delay at all nodes with a normal distribution
 
 
-  public Integer congestion = 3;
+  public Integer congestion = 4;
   public Integer N = 2712;
   public double dilation = 356;
 
   /*protocol 1*/
-  public double alpha = 8000.0;
+  public double alpha = 2000.0;
 
   /*protocol 2(or)3*/
   public double mean = 0;
