@@ -20,7 +20,7 @@ public class Globals {
   public Double SPEED_SF = 45.0;
 
   /* LMR Protocol */
-  public int protocol = 0;
+  public int protocol = 1;
   // 0 - Default [No LMR]
   // 1 - delay at source [LMR]
   // 2 - every train sent with a initial velocity picked by a normal distribution
