@@ -148,6 +148,10 @@ public class SignalNode extends Sim_entity {
 
               Double trainDelay = ((globals.linkDistance * 3600) / globals.speedHash.get(msg.train_id+nodeName) * 1.0); 
 
+              if (globals.protocol == 3) {
+                Sim_normal_obj normalDist = new Sim_normal_obj("normal", globals.mean, globals.var);
+                trainDelay = ((globals.linkDistance * 3600) / (globals.speedHash.get(msg.train_id+nodeName) + normalDist.sample() ) * 1.0);
+              }
               if (globals.protocol == 4) {
                 
                 Sim_uniform_obj unif = new Sim_uniform_obj("unif", 0, (globals.frame_size));
