@@ -38,7 +38,7 @@ public class Globals {
   /*protocol 2(or)3*/
   public double mean = 0;
   public double var = 10;
-  public double p3Beta = 10;
+  public double p3Beta = 0.1;
 
   /*protocol 4*/
   public double beta = 300;
