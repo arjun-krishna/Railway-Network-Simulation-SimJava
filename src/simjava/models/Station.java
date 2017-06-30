@@ -219,8 +219,11 @@ public class Station extends Sim_entity {
               Double trainDelay = ((globals.linkDistance * 3600) / globals.speedHash.get(msg.train_id+nodeName)*1.0); 
                 
               if (globals.protocol == 3) {
-                Sim_normal_obj normalDist = new Sim_normal_obj("normal", globals.mean, globals.var);
-                trainDelay = ((globals.linkDistance * 3600) / (globals.speedHash.get(msg.train_id+nodeName) + normalDist.sample() ) * 1.0);
+                // Sim_normal_obj normalDist = new Sim_normal_obj("normal", globals.mean, globals.var);
+                // trainDelay = ((globals.linkDistance * 3600) / (globals.speedHash.get(msg.train_id+nodeName) + normalDist.sample() ) * 1.0);
+                if(msg.delayed == true){
+                  trainDelay = ((globals.linkDistance * 3600) / (globals.speedHash.get(msg.train_id+nodeName)*(1 - globals.p3Beta)) * 1.0);  
+                }
               }
 
               if (globals.protocol == 4) {
@@ -258,6 +261,7 @@ public class Station extends Sim_entity {
           } else {
             // schedule a requester
             SignalPacket requestingNode = requesters.remove(0);
+            requestingNode.delayed = true;
             sim_schedule(out.get(requestingNode.nodeName), globals.signalDelay, 2, requestingNode);
           }
           sim_completed(e);
