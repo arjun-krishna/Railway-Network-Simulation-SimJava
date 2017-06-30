@@ -118,10 +118,15 @@ for node in total_delay :
 
 	node_avg_delay[node] = (total_delay[node] / count[node])
 
+mean_delay = delay_sum/(delay_count*1.0)
+variance = 0
 
 max1node = node_avg_delay.iterkeys().next()
 for node in node_avg_delay:
 	max1node = node if node_avg_delay[max1node] < node_avg_delay[node] else max1node 
+	variance += (node_avg_delay[node] - mean_delay)**2
+variance = variance / (len(node_avg_delay)*1.0)
+
 max2node = node_avg_delay.iterkeys().next()
 for node in node_avg_delay :
 	if node_avg_delay[node]<node_avg_delay[max1node] :
@@ -142,7 +147,7 @@ print max2node , node_avg_delay[max2node]
 print max3node , node_avg_delay[max3node]
 print max4node , node_avg_delay[max4node]
 print 'mean delay: ' + str(delay_sum/(delay_count*1.0))
-
+print 'Std Deviation: ' + str(variance**(0.5))
 print node_name[avg_delay.index(max(avg_delay))] 
 # Plot the average Delay
 plt.plot(range(len(node_name)), avg_delay)
@@ -191,10 +196,14 @@ with open('../../data/sr_data/wod.json','r') as f :
 		avg_end_to_end_map[train_no] = avg_end_to_end_delay
 		end_to_end_delay_vector.append(avg_end_to_end_delay)
 		train_no_vector.append(train_no)
-
+	mean_delay = end_to_end_delay_sum/(end_to_end_delay_count*1.0)
+	variance = 0
 	max1node = avg_end_to_end_map.iterkeys().next()
 	for node in avg_end_to_end_map:
 		max1node = node if avg_end_to_end_map[max1node] < avg_end_to_end_map[node] else max1node 
+		variance += (avg_end_to_end_map[node] - mean_delay)**2
+	variance = variance / (len(avg_end_to_end_map)*1.0)
+
 	max2node = avg_end_to_end_map.iterkeys().next()
 	for node in avg_end_to_end_map :
 		if avg_end_to_end_map[node]<avg_end_to_end_map[max1node]:
@@ -215,6 +224,7 @@ with open('../../data/sr_data/wod.json','r') as f :
 	print max3node , avg_end_to_end_map[max3node]
 	print max4node , avg_end_to_end_map[max4node]
 	print 'mean end-to-end delay : ' + str(end_to_end_delay_sum/(end_to_end_delay_count*1.00))
+	print 'Std Deviation: ' + str(variance**(0.5))
 	plt.plot(range(len(end_to_end_delay_vector)), end_to_end_delay_vector)
 	plt.tick_params(
     axis='x',          # changes apply to the x-axis
@@ -239,11 +249,14 @@ for station in no_of_delay :
 	x.append(station)
 	no_of_delays+=no_of_delay[station]
 	no_of_stations+=1
-
+mean_delay = no_of_delays/( no_of_stations*1.0)
+variance = 0
 
 max1node = no_of_delay.iterkeys().next()
 for node in no_of_delay:
 	max1node = node if no_of_delay[max1node] < no_of_delay[node] else max1node 
+	variance += (no_of_delay[node] - mean_delay)**2
+variance = variance/(len(no_of_delay)*1.00)
 max2node = no_of_delay.iterkeys().next()
 for node in no_of_delay :
 	if no_of_delay[node]<no_of_delay[max1node]:
@@ -264,7 +277,7 @@ print max2node , no_of_delay[max2node]
 print max3node , no_of_delay[max3node]
 print max4node , no_of_delay[max4node]
 print 'mean no_of_delays : ' + str(no_of_delays/(no_of_stations*1.00))
-
+print 'std. deviation : ' + str(variance**(0.5));
 plt.plot(range(len(y)), y)
 plt.tick_params(
   axis='x',          # changes apply to the x-axis
